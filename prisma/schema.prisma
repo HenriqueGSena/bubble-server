@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model accommodation {
+  id_acc          String  @id @db.VarChar
+  status          String? @db.VarChar
+  nome_acomodacao String? @db.VarChar
+  tamanho         Int?
+  cama            String? @db.VarChar
+  qtde_quartos    Int?
+  qtde_banheiros  Float?
+  cod_pais        String? @db.VarChar
+  cidade          String? @db.VarChar
+  endereco        String? @db.VarChar
+  bairro          String? @db.VarChar
+  latitude        Float?
+  longitude       Float?
+  capacidade      Int?
+  id_proprietario String?
+}
+
+model accommodation_price {
+  id         Int       @id @default(autoincrement())
+  name       String?   @unique @db.VarChar
+  price      Float?
+  tier       Int?
+  min_price  Float?
+  base_price Float?
+  created_at DateTime? @db.Timestamptz(6)
+}
+
+model bookings {
+  id_booking         String  @id @db.VarChar
+  portal_reference   String? @db.VarChar
+  check_in_data      String? @db.VarChar
+  check_out_data     String? @db.VarChar
+  reservation_date   String? @db.VarChar
+  status             String? @db.VarChar
+  accommodation_code String? @db.VarChar
+  sale_channel       String? @db.VarChar
+  total_payment      Float?
+  net_payment        Float?
+  extra_value        Float?
+  extra_descrition   String? @db.VarChar
+  portal_comission   Float?
+  update_date        String?
+}
+
+model huggy_chats_data {
+  chat_id          String  @id @db.VarChar
+  agent_id         String? @db.VarChar
+  tabulation_id    String? @db.VarChar
+  client_id        String? @db.VarChar
+  status_chat      String? @db.VarChar
+  creation_date    String? @db.VarChar
+  update_date      String? @db.VarChar
+  attended_at_date String? @db.VarChar
+  closed_date      String? @db.VarChar
+}
+
+model owner {
+  id_proprietario String  @id @db.VarChar
+  nome            String? @db.VarChar
+  documento       String? @db.VarChar
+  telefone        String? @db.VarChar
+  email           String? @db.VarChar
+}
